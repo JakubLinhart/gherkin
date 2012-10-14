@@ -14,3 +14,7 @@ npm-debug.log
 doc/
 .yardoc
 Gemfile.lock
+*.suo
+TestResults
+bin
+obj

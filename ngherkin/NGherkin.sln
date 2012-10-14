@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGherkin", "NGherkin\NGherkin.csproj", "{EDC16F01-3919-40ED-AA3B-95A69BF29474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NGherkin.Tests", "NGherkin.Tests\NGherkin.Tests.csproj", "{AD925B29-09E7-41C0-8AB5-89CC9773B950}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDC16F01-3919-40ED-AA3B-95A69BF29474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC16F01-3919-40ED-AA3B-95A69BF29474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC16F01-3919-40ED-AA3B-95A69BF29474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC16F01-3919-40ED-AA3B-95A69BF29474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD925B29-09E7-41C0-8AB5-89CC9773B950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD925B29-09E7-41C0-8AB5-89CC9773B950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD925B29-09E7-41C0-8AB5-89CC9773B950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD925B29-09E7-41C0-8AB5-89CC9773B950}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
