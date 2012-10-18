@@ -45,9 +45,7 @@
   <ItemGroup>
     <Compile Include="formatter\AnsiFormats.cs" />
     <Compile Include="formatter\ansi\AnsiEscapes.cs" />
-    <Compile Include="formatter\Appendable.cs" />
     <Compile Include="formatter\Argument.cs" />
-    <Compile Include="formatter\CharSequence.cs" />
     <Compile Include="formatter\Filter.cs" />
     <Compile Include="formatter\FilterFormatter.cs" />
     <Compile Include="formatter\Format.cs" />

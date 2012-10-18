@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 namespace gherkin.formatter.model
 {
     public class Result : Mappable
@@ -88,7 +89,8 @@ namespace gherkin.formatter.model
 
         public String getErrorMessage()
         {
-            throw new NotImplementedException();
+            // TODO:
+            return string.Empty;
         }
 
         public void replay(Reporter reporter)

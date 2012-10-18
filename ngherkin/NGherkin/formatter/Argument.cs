@@ -4,7 +4,7 @@ namespace gherkin.formatter
 {
     public class Argument : Mappable
     {
-        private int offset;
+        private int? offset;
         private String val;
 
         public Argument(int offset, String val)
@@ -18,7 +18,7 @@ namespace gherkin.formatter
             return val;
         }
 
-        public int getOffset()
+        public int? getOffset()
         {
             return offset;
         }

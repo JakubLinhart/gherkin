@@ -1,12 +1,13 @@
 using System;
 using gherkin.formatter.model;
 using System.Collections.Generic;
+using System.IO;
 
 namespace gherkin.formatter
 {
     public class JSONFormatter : Reporter, Formatter
     {
-        public JSONFormatter(Appendable @out)
+        public JSONFormatter(TextWriter @out)
         {
             throw new NotImplementedException();
         }

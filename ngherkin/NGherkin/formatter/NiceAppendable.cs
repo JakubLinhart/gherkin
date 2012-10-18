@@ -1,5 +1,6 @@
 using NGherkin.formatter;
 using System;
+using System.IO;
 
 namespace gherkin.formatter
 {
@@ -8,38 +9,44 @@ namespace gherkin.formatter
      */
     public class NiceAppendable
     {
-        public NiceAppendable(Appendable @out)
+        private TextWriter @out;
+
+        public NiceAppendable(TextWriter @out)
         {
+            this.@out = @out;
         }
 
-        public NiceAppendable append(CharSequence csq)
+        public NiceAppendable append(string csq)
         {
-            throw new NotImplementedException();
+            this.@out.Write(csq);
+            return this;
         }
 
-        public NiceAppendable append(CharSequence csq, int start, int end)
+        public NiceAppendable append(string csq, int start, int end)
         {
             throw new NotImplementedException();
         }
 
         public NiceAppendable append(char c)
         {
-            throw new NotImplementedException();
+            this.@out.Write(c);
+
+            return this;
         }
 
         public NiceAppendable println()
         {
-            throw new NotImplementedException();
+            return append(Environment.NewLine);
         }
 
-        public NiceAppendable println(CharSequence csq)
+        public NiceAppendable println(string csq)
         {
-            throw new NotImplementedException();
+            return append(csq).println();
         }
 
         public void close()
         {
-            throw new NotImplementedException();
+            @out.Dispose();
         }
     }
 }

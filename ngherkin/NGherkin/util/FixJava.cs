@@ -6,7 +6,7 @@ namespace gherkin.util
 {
 public class FixJava {
     public static String join(List<String> strings, String separator) {
-        throw new NotImplementedException();
+        return string.Join(separator, strings.ToArray());
     }
 
     public static List<R> map<T,R>(List<T> objects, Mapper<T,R> mapper) {

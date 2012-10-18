@@ -5,32 +5,32 @@ namespace gherkin.formatter.model
 {
     public class Match : Mappable
     {
-        public static Match UNDEFINED
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        private static long serialVersionUID = 1L;
+
+        private List<Argument> arguments;
+        private String location;
+
+        public static Match UNDEFINED = new Match(new List<Argument>(), null);
 
         public Match(List<Argument> arguments, String location)
         {
-            throw new NotImplementedException();
+            this.arguments = arguments;
+            this.location = location;
         }
 
         public List<Argument> getArguments()
         {
-            throw new NotImplementedException();
+            return arguments;
         }
 
         public String getLocation()
         {
-            throw new NotImplementedException();
+            return location;
         }
 
         public void replay(Reporter reporter)
         {
-            throw new NotImplementedException();
+            reporter.match(this);
         }
     }
 }

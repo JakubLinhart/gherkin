@@ -1,25 +1,27 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using gherkin.formatter.model;
+using System.Threading;
 
 namespace gherkin.formatter
 {
     [TestClass]
     public class PrettyFormatterTest
     {
-        //private static final List<Comment> NO_COMMENTS = emptyList();
-        //private static final List<Tag> NO_TAGS = Collections.emptyList();
+        private static List<Comment> NO_COMMENTS = new List<Comment>();
+        private static List<Tag> NO_TAGS = new List<Tag>();
 
         [TestMethod]
         public void prints_nice_colors()
         {
-            throw new NotImplementedException();
-            //PrettyFormatter f = new PrettyFormatter(System.out, false, false);
-            //f.scenario(new Scenario(NO_COMMENTS, NO_TAGS, "Scenario", "a scenario", "", 1, "a-scenario"));
-            //f.step(new Step(new ArrayList<Comment>(), "Given ", "I have 6 cukes", 1, null, null));
-            //Thread.sleep(1000);
-            //f.match(new Match(Arrays.asList(new Argument(7, "6")), "somewhere.brainfuck"));
-            //Thread.sleep(1000);
-            //f.result(new Result("failed", 55L, "Something\nbad\nhappened"));
+            PrettyFormatter f = new PrettyFormatter(Console.Out, false, false);
+            f.scenario(new Scenario(NO_COMMENTS, NO_TAGS, "Scenario", "a scenario", "", 1, "a-scenario"));
+            f.step(new Step(new List<Comment>(), "Given ", "I have 6 cukes", 1, null, null));
+            Thread.Sleep(1000);
+            f.match(new Match(new List<Argument>() { new Argument(7, "6") }, "somewhere.brainfuck"));
+            Thread.Sleep(1000);
+            f.result(new Result("failed", 55L, "Something\nbad\nhappened"));
         }
 
         [TestMethod]

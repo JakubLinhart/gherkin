@@ -1,24 +1,38 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace gherkin.formatter.model
 {
     public abstract class TagStatement : DescribedStatement
     {
+        private static long serialVersionUID = 1L;
+
+        private List<Tag> tags;
+        private String id;
+
         public TagStatement(List<Comment> comments, List<Tag> tags, String keyword, String name, String description, int line, String id)
             : base(comments, keyword, name, description, line)
         {
-            throw new NotImplementedException();
+            this.tags = tags;
+            this.id = id;
         }
 
         public List<Tag> getTags()
         {
-            throw new NotImplementedException();
+            return tags;
         }
 
         protected override int getFirstNonCommentLine()
         {
-            throw new NotImplementedException();
+            if (!getTags().Any())
+            {
+                return getLine();
+            }
+            else
+            {
+                return getTags().First().getLine();
+            }
         }
     }
 }
