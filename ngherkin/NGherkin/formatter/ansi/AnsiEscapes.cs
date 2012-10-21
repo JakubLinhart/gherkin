@@ -34,7 +34,7 @@ namespace gherkin.formatter.ansi
             return new AnsiEscapes(code.ToString() + "m");
         }
 
-        public static AnsiEscapes up(int count)
+        public static AnsiEscapes up(int? count)
         {
             return new AnsiEscapes(count.ToString() + "A");
         }

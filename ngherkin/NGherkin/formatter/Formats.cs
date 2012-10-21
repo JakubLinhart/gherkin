@@ -6,6 +6,6 @@ namespace gherkin.formatter
     {
         Format get(String key);
 
-        String up(int n);
+        String up(int? n);
     }
 }

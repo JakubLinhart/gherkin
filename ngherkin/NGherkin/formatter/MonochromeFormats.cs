@@ -9,7 +9,7 @@ namespace gherkin.formatter
             throw new NotImplementedException();
         }
 
-        public String up(int n)
+        public String up(int? n)
         {
             throw new NotImplementedException();
         }

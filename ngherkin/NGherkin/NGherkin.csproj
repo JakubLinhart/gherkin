@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>gherkin</RootNamespace>
     <AssemblyName>gherkin</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -86,10 +86,12 @@
     <Compile Include="formatter\TagFilter.cs" />
     <Compile Include="I18n.cs" />
     <Compile Include="JSONParser.cs" />
+    <Compile Include="lexer\En.cs" />
     <Compile Include="lexer\I18nLexer.cs" />
     <Compile Include="lexer\Lexer.cs" />
     <Compile Include="lexer\LexingError.cs" />
     <Compile Include="lexer\Listener.cs" />
+    <Compile Include="Locale.cs" />
     <Compile Include="parser\FormatterListener.cs" />
     <Compile Include="parser\ParseError.cs" />
     <Compile Include="parser\Parser.cs" />
@@ -99,8 +101,10 @@
     <Compile Include="util\FixJava.cs" />
     <Compile Include="util\Mapper.cs" />
     <Compile Include="util\Reader.cs" />
+    <Compile Include="util\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="i18n.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

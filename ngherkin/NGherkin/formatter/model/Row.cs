@@ -12,29 +12,50 @@ namespace gherkin.formatter.model
             INSERT
         }
 
+        private List<Comment> comments;
+        private List<String> cells;
+        private int line;
+
         public Row(List<Comment> comments, List<String> cells, int line)
         {
-            throw new NotImplementedException();
+            if (comments == null)
+            {
+                throw new ArgumentNullException("comments");
+            }
+
+            if (cells == null)
+            {
+                throw new ArgumentNullException("cells");
+            }
+
+            this.comments = comments;
+            this.cells = cells;
+            this.line = line;
         }
 
         public List<Comment> getComments()
         {
-            throw new NotImplementedException();
+            return this.comments;
         }
 
         public List<String> getCells()
         {
-            throw new NotImplementedException();
+            return this.cells;
         }
 
         public int getLine()
         {
-            throw new NotImplementedException();
+            return this.line;
         }
 
         public List<CellResult> createResults(String status)
         {
-            throw new NotImplementedException();
+            List<CellResult> results = new List<CellResult>();
+            foreach (string cell in cells) {
+                results.Add(new CellResult(status));
+            }
+
+            return results;
         }
 
         public abstract DiffType getDiffType();

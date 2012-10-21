@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using gherkin.formatter.model;
 namespace gherkin
 {
     [TestClass]
@@ -8,25 +10,22 @@ namespace gherkin
         [TestMethod]
         public void notFooShouldMatchBar()
         {
-            throw new NotImplementedException();
-            //TagExpression e = new TagExpression(Collections.singletonList("~@foo"));
-            //assertTrue(e.eval(Collections.singletonList("@bar")));
+            TagExpression e = new TagExpression(new List<string> { "~@foo" });
+            Assert.IsTrue(e.eval(new List<Tag> { new Tag("@bar", 1) } ));
         }
 
         [TestMethod]
         public void notFooShouldNotMatchFoo()
         {
-            throw new NotImplementedException();
-            //TagExpression e = new TagExpression(Collections.singletonList("~@foo"));
-            //assertFalse(e.eval(Collections.singletonList("@foo")));
+            TagExpression e = new TagExpression(new List<string> { "~@foo" });
+            Assert.IsFalse(e.eval(new List<Tag> { new Tag("@foo", 1) }));
         }
 
         [TestMethod]
         public void fooShouldNotMatchEmptyTags()
         {
-            throw new NotImplementedException();
-            //TagExpression e = new TagExpression(Collections.singletonList("@foo"));
-            //assertFalse(e.eval(Collections.<String>emptyList()));
+            TagExpression e = new TagExpression(new List<string>  { "@foo" });
+            Assert.IsFalse(e.eval(new List<Tag> { }));
         }
     }
 }

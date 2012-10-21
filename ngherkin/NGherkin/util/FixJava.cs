@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using NGherkin.util;
+using System.Reflection;
+using System.IO;
 
 namespace gherkin.util
 {
@@ -13,8 +15,15 @@ public class FixJava {
         throw new NotImplementedException();
     }
 
-    public static String readResource(String resourcePath) {
-        throw new NotImplementedException();
+    public static String readResource(String resourcePath, Assembly assembly) {
+        using (var stream = assembly.GetManifestResourceStream(resourcePath))
+        {
+            using (var reader = new StreamReader(stream))
+            {
+                string resource = reader.ReadToEnd();
+                return resource;
+            }
+        }
     }
 
     public static String readReader(Reader reader) {

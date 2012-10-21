@@ -61,7 +61,7 @@ namespace gherkin.formatter
             return format;
         }
 
-        public String up(int n)
+        public String up(int? n)
         {
             return AnsiEscapes.up(n).toString();
         }

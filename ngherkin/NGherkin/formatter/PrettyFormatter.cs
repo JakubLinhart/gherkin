@@ -24,7 +24,7 @@ namespace gherkin.formatter
         private String _uri;
         private Formats formats;
         private Match _match;
-        private int[][] cellLengths;
+        private int[,] cellLengths;
         private int[] maxLengths;
         private int rowIndex;
         private IEnumerable<Row> rows;
@@ -284,19 +284,121 @@ namespace gherkin.formatter
             }
         }
 
-        public void table(IEnumerable<Row> rows)
+
+        private void prepareTable(IEnumerable<Row> rows)
         {
-            throw new NotImplementedException();
+            this.rows = rows;
+            int columnCount = rows.First().getCells().Count;
+            cellLengths = new int[rows.Count(), columnCount];
+            maxLengths = new int[columnCount];
+            for (int rowIndex = 0; rowIndex < rows.Count(); rowIndex++) {
+                Row row = rows.Skip(rowIndex).First();
+                List<String> cells = row.getCells();
+                for (int colIndex = 0; colIndex < columnCount; colIndex++) {
+                    String cell = cells[colIndex];
+                    int length = escapeCell(cell).Length;
+                    cellLengths[rowIndex, colIndex] = length;
+                    maxLengths[colIndex] = Math.Max(maxLengths[colIndex], length);
+                }
+            }
+            this.rowIndex = 0;
         }
 
+        public void table(IEnumerable<Row> rows)
+        {
+            prepareTable(rows);
+            if (!executing) {
+                foreach (Row row in rows) {
+                    this.row(row.createResults("skipped"));
+                    nextRow();
+                }
+            }
+        }
+        
+        private String escapeCell(String cell)
+        {
+            return cell.Replace("\\\\(?!\\|)", "\\\\\\\\").Replace("\\n", "\\\\n").Replace("\\|", "\\\\|");
+        }
+
+        private void padSpace(int indent) {
+            for (int i = 0; i < indent; i++) {
+                @out.append(" ");
+            }
+    }
         public void row(List<CellResult> cellResults)
         {
-            throw new NotImplementedException();
+            Row row = rows.Skip(rowIndex).First();
+            if (rowsAbove) {
+                @out.append(formats.up(rowHeight));
+            }
+            else
+            {
+                rowsAbove = true;
+            }
+
+            rowHeight = 1;
+
+            foreach (Comment comment in row.getComments()) {
+                @out.append("      ");
+                @out.println(comment.getValue());
+                rowHeight++;
+            }
+
+            switch (row.getDiffType()) {
+                case gherkin.formatter.model.Row.DiffType.NONE:
+                    @out.append("      | ");
+                    break;
+                case gherkin.formatter.model.Row.DiffType.DELETE:
+                    @out.append("    ").append(formats.get("skipped").text("-")).append(" | ");
+                    break;
+                case gherkin.formatter.model.Row.DiffType.INSERT:
+                    @out.append("    ").append(formats.get("comment").text("+")).append(" | ");
+                    break;
+            }
+
+            for (int colIndex = 0; colIndex < maxLengths.Length; colIndex++) {
+                String cellText = escapeCell(row.getCells()[colIndex]);
+                String status = null;
+                switch (row.getDiffType()) {
+                    case gherkin.formatter.model.Row.DiffType.NONE:
+                        status = cellResults[colIndex].getStatus();
+                        break;
+                    case gherkin.formatter.model.Row.DiffType.DELETE:
+                        status = "skipped";
+                        break;
+                    case gherkin.formatter.model.Row.DiffType.INSERT:
+                        status = "comment";
+                        break;
+                }
+                Format format = formats.get(status);
+                @out.append(format.text(cellText));
+                int padding = maxLengths[colIndex] - cellLengths[rowIndex, colIndex];
+                padSpace(padding);
+                if (colIndex < maxLengths.Length - 1) {
+                    @out.append(" | ");
+                } else {
+                    @out.append(" |");
+                }
+            }
+
+            @out.println();
+            rowHeight++;
+            ISet<Result> seenResults = new HashSet<Result>();
+            foreach (CellResult cellResult in cellResults) {
+                foreach (Result result in cellResult.getResults()) {
+                    if (result.getErrorMessage() != null && !seenResults.Contains(result)) {
+                        printError(result);
+                        rowHeight += result.getErrorMessage().Split('\n').Length;
+                        seenResults.Add(result);
+                    }
+                }
+            }
         }
 
         public void nextRow()
         {
-            throw new NotImplementedException();
+            rowIndex++;
+            rowsAbove = false;
         }
 
         public void syntaxError(String state, String @event, List<String> legalEvents, String uri, int line)
